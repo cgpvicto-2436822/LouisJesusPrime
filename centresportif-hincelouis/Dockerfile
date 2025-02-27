@@ -16,4 +16,4 @@ WORKDIR /var/www/html
 EXPOSE 10000
 
 # Lancer PHP built-in server
-CMD ["php", "-S", "0.0.0.0:10000", "-t", "centresportif-hincelouis/index.php"]
+CMD ["php", "-S", "0.0.0.0:10000", "-t", ".index.php"]
