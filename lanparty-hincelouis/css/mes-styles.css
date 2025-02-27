@@ -1,0 +1,29 @@
+i {
+    color: black;
+    font-size: 2em;
+}
+
+.items .item.first {
+    background: url('../medias/commun/MesImages/jesus-christ-8168123_1280.webp');
+    background-size: contain;
+}
+
+.items .item.second {
+    background: url('../medias/commun/MesImages/DLX-Siege-Prime-53.jpg');
+    background-size: contain;
+}
+
+.items .item.third {
+    background: url('../medias/commun/MesImages/OIP.jpg');
+    background-size: contain;
+}
+
+.items .item.fourth {
+    background: url('../medias/commun/MesImages/Logo.png');
+    background-size: contain;
+}
+
+.items .item.five {
+    background: url('../medias/commun/MesImages/Nouveau projet.jpg');
+    background-size: contain;
+}
