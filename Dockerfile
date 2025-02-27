@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev
 COPY lanparty-hincelouis /var/www/html
 
 # Définir le répertoire de travail sur le dossier lanparty-hincelouis
-WORKDIR /var/www/html/ lanparty-hincelouis
+WORKDIR /var/www/html/lanparty-hincelouis
 
 # Exposer le port 10000 pour l'accès externe
 EXPOSE 10000
