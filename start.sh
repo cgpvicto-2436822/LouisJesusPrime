@@ -11,7 +11,7 @@ done
 
 # Créer la BDD si elle n'existe pas et exécuter le script SQL
 mysql -u root <<EOF
-CREATE DATABASE IF NOT EXISTS mon_site CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS lanparty_hincelouis CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 EOF
 
 mysql -u root lanparty_hincelouis < /init.sql
