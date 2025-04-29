@@ -1,0 +1,145 @@
+
+i {
+    color: black;
+    font-size: 2em;
+}
+
+#un
+{
+    background-size: contain;
+}
+
+label
+{
+    color: #cccccc;
+}
+
+/**v********LES STYLES CSS CI-DESSOUS PROVIENNENT D'INTERNET*****************v***/
+
+option
+{
+    background-color: #5e071c; /* bleu vif */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    text-align: center;
+}
+
+select
+{
+    background-color: #57222c; /* bleu vif */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    text-align: center;
+}
+
+table{
+    border-style: dashed;
+    border-color: #0d2b4e;
+    border-width: thick;
+    width: 100%;
+    margin: 0 auto; /* centre le tableau horizontalement */
+    border-left: 4px solid #333; /* bordure gauche */
+    border-right: 4px solid #333; /* bordure droite */
+    border-collapse: collapse; /* fusionne les bordures internes */
+}
+
+th, td {
+    border: 1px solid #000000; /* bordures internes */
+    padding: 8px;
+    text-align: left;
+}
+
+.error-message
+{
+    color: red;
+}
+
+form {
+    max-width: 600px;
+    margin: auto;
+    background-color: #030d25;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+label {
+    margin-bottom: 5px;
+    display: block;
+    font-weight: bold;
+}
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+input[type="submit"] {
+    background-color: #510c0c;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+input[type="submit"]:hover {
+    background-color: #490b0b;
+}
+
+.alert {
+    display: block;
+    color: white;
+    font-size: 1.1em;
+    margin-top: 5px;
+    margin-bottom: 7px;
+    padding: 15px 20px;
+    border: 1px solid #bebdbd;
+    border-radius: 5px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+
+.alert-success {
+    background-color: #55b559;
+}
+
+
+.alert-danger {
+    background-color: #f55145;
+}
+
+
+button {
+    background-color: #390511; /* bleu vif */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    text-align: center;
+}
+
+button:hover {
+    background-color: #da0b0b; /* bleu un peu plus foncé au survol */
+}
+
+.boutonBleu
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

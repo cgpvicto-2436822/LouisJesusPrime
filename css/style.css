@@ -1,0 +1,208 @@
+/* ===================================================================
+ * Styles principaux pour modèle flex
+ * Par Christiane Lagacé
+ * Dernière révision : 2025-01-09
+ * ------------------------------------------------------------------
+*/
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Birthstone:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hurricane&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@200..800&display=swap');
+
+:root {
+    --couleur-principale-fonce: #091735;
+    --couleur-principale-pale: #1c4859;
+    --couleur-principale-tres-pale: #0b2e40;
+    --couleur-secondaire-fonce: #97c6ec;
+    --couleur-secondaire-pale: #99b4ff;
+    --couleur-punch-fonce: #695483;
+    --couleur-punch-pale: #B874A8;
+}
+
+* {
+    box-sizing: border-box; 
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    margin: 0;
+    font-family: "Lucida Sans Unicode", sans-serif;
+}
+
+a {
+    color: var(--couleur-punch-pale);
+    text-decoration: none;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+#main {
+    flex: 1;
+    background-color: var(--couleur-secondaire-pale);
+    padding: 10px 0 20px 0;
+}
+
+header {
+    background-color: var(--couleur-principale-fonce);
+    color: var(--couleur-secondaire-pale);
+    padding: 5px 0;
+}
+
+header .title {
+    /*font-family: "Dancing Script", serif;*/
+    /*font-family: "Birthstone", serif;*/
+    font-family: "Hurricane", serif;
+    font-size: 3em;
+    letter-spacing: 10px;   /* Ajuster pour faire arriver avec le slogan */
+}
+
+header .logo img {
+    filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 1.2));   /* Ombrage qui n'est que sous les zones non transparentes */
+}
+
+header .slogan {
+    font-family: "Gemunu Libre", serif;
+    font-size: 1em;
+    letter-spacing: 1.7px;   /* Ajuster pour faire arriver avec le titre */
+}
+
+nav {
+    height: 55px;
+    padding-top: 20px;
+    background: url('../medias/commun/bg-nav.png') repeat-x;
+}
+
+nav a {
+    color: var(--couleur-principale-pale);
+    text-decoration: none;
+    padding: 7px 12px;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+nav a:hover {
+    color: #0d2b4e;
+}
+
+nav a.active {
+    background-color: var(--couleur-secondaire-pale);
+    border: 1px solid var(--couleur-principale-fonce);
+}
+
+.logo-text {
+    display:flex;
+    gap: 35px;
+}
+
+h1 {
+    font-family: "Hurricane", serif;
+    font-size: 3em;
+    color: var(--couleur-principale-fonce);
+    margin: 15px 0;
+}
+
+footer {
+    min-height: 70px;
+    padding: 15px;
+    background: url('../medias/commun/bg-footer.png') repeat-x bottom;
+    text-align: center;
+    font-size: 0.9em;
+    color: var(--couleur-principale-pale);
+}
+
+footer a {
+    color: var(--couleur-principale-tres-pale);
+}
+
+nav, footer {
+    background-color: var(--couleur-secondaire-fonce);
+}
+
+.separation {
+    height: 8px;
+    background: url('../medias/commun/pattern.png') repeat-x;
+}
+
+.items {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin: 40px 0;
+    align-items: stretch;
+}
+
+.items .item {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-width: 150px;
+    max-width: 200px;
+    /*background-color: var(--couleur-secondaire-fonce);*/
+    border: 1px solid var(--couleur-principale-fonce);
+    border-radius: 20px;
+    position: relative;
+    overflow: visible;
+}
+
+.items .item a {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.items .item a .content {
+    flex-grow: 1;
+    min-height: 100px;
+    color: var(--couleur-principale-fonce);
+    padding: 15px;
+}
+
+.items .item a .caption {
+    background: url('../medias/commun/bg.png') repeat var(--couleur-principale-fonce);
+    border-radius: 0 0 18px 18px;
+    text-align: center;
+    padding: 30px 0 20px 0;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.items .item a .caption .middle {
+    width: 80px;
+    height: 80px;
+    background: url('../medias/commun/bg.png') repeat var(--couleur-principale-fonce);
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    margin-left: -40px;
+    top: -40px;
+    padding-top: 20px;
+}
+
+.items .item a .caption .middle .icon {
+    color: var(--couleur-secondaire-fonce);
+    font-size: 2em;
+}
+
+.items .item a .caption .title {
+    position: relative;
+    font-size: 24px;
+    color: var(--couleur-secondaire-pale);
+}
+
+.items .item a .caption .subtitle {
+    font-family: "Gemunu Libre", serif;
+    position: relative;
+    color: var(--couleur-secondaire-fonce);
+    margin-top: 8px;
+}
+
+
+
+
+
