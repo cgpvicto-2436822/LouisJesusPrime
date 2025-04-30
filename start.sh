@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Démarrer MySQL en arrière-plan
-service mysql start
-
 # Attendre que MySQL soit prêt
 echo "Attente de MySQL..."
 until mysql -u root -e "SELECT 1" > /dev/null 2>&1; do
