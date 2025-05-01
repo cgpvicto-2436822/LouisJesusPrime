@@ -2,19 +2,17 @@ FROM alpine:3.19
 
 # Installer PHP 8.0 et les dépendances nécessaires
 RUN apk add --no-cache --update \
-    php80 \
-    php80-fpm \
-    php80-mysqli \
-    php80-pdo \
-    php80-pdo_pgsql \
-    php80-gd \
-    php80-xml \
-    php80-mbstring \
-    php80-bcmath \
+    php \
+    php-fpm \
+    php-mysqli \
+    php-pdo \
+    php-pdo_pgsql \
+    php-gd \
+    php-xml \
+    php-mbstring \
+    php-bcmath \
     apache2 \
     apache2-utils \
-    mariadb-client \
-    mariadb-server \
     mysql-client \
     zip \
     unzip \
@@ -23,6 +21,9 @@ RUN apk add --no-cache --update \
     libwebp-dev \
     freetype-dev \
     libxpm-dev
+
+# Installer MariaDB Server séparément
+RUN apk add --no-cache mariadb mariadb-server
 
 # Configurer les extensions PHP
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp --with-xpm
