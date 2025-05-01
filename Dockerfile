@@ -1,31 +1,59 @@
-# Choisir l'image PHP officielle avec CLI
-FROM php:8.0-cli
+FROM php:8.0-fpm-alpine
 
-# Installer les dépendances PHP + MySQL server
-RUN apt-get update && \
-    apt-get install -y \
-        libpng-dev \
-        libjpeg-dev \
-        libfreetype6-dev \
-        default-mysql-server \
-        mariadb-client && \
-    docker-php-ext-configure gd --with-freetype --with-jpeg && \
-    docker-php-ext-install gd mysqli && \
-    docker-php-ext-enable gd mysqli
+# Installer les dépendances système nécessaires pour PHP et Apache + MySQL
+RUN apk add --no-cache --update \
+    apache2 \
+    apache2-utils \
+    libpng-dev \
+    libjpeg-turbo-dev \
+    libwebp-dev \
+    freetype-dev \
+    libxpm-dev \
+    postgresql-client \
+    mariadb-client \
+    mysql mysql-client \
+    mysql-server \
+    zip \
+    unzip
+
+# Installer les extensions PHP de base
+RUN docker-php-ext-configure gd \
+    --with-freetype \
+    --with-jpeg \
+    --with-webp \
+    --with-xpm
+RUN docker-php-ext-install -j$(nproc) gd pdo pdo_pgsql mysqli zip
+
+# Installer d'autres extensions courantes (à adapter selon vos besoins)
+RUN docker-php-ext-install -j$(nproc) \
+    bcmath \
+    mbstring \
+    xml \
+    intl
+
+# Installer Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Activer le module rewrite d'Apache
+RUN a2enmod rewrite
+
+# Copier la configuration Apache personnalisée
+COPY apache2.conf /etc/apache2/apache2.conf
+COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
+
+# Copier le script d'initialisation SQL et le script de démarrage
+COPY init.sql /docker-entrypoint-initdb.d/10-init.sql
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
 
 # Copier le code de l'application dans le conteneur
 COPY . /var/www/html
 
-# Copier le script SQL et le script de démarrage
-COPY init.sql /init.sql
-COPY start.sh /start.sh
-RUN chmod +x /start.sh
-
 # Définir le dossier de travail
 WORKDIR /var/www/html
 
-# Exposer le port sur lequel ton serveur PHP intégré tourne
-EXPOSE 10000
+# Exposer le port 80 pour Apache et le port 3306 pour MySQL (pour un accès externe si nécessaire)
+EXPOSE 80 3306
 
-# Lancer le script qui démarre MySQL + PHP
+# Définir la commande pour démarrer le script de démarrage
 CMD ["/bin/bash", "/start.sh"]
