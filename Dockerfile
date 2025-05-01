@@ -1,6 +1,6 @@
 FROM php:8.0-fpm-alpine
 
-# Installer les dépendances système nécessaires pour PHP et Apache + MySQL
+# Installer les dépendances système nécessaires pour PHP et Apache + MariaDB
 RUN apk add --no-cache --update \
     apache2 \
     apache2-utils \
@@ -12,7 +12,7 @@ RUN apk add --no-cache --update \
     postgresql-client \
     mariadb-client \
     mysql mysql-client \
-    mysql-server \
+    mariadb-server \
     zip \
     unzip
 
