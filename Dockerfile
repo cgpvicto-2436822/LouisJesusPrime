@@ -13,24 +13,17 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 RUN docker-php-ext-install -j$(nproc) gd mysqli pdo pdo_pgsql zip
 
-# Activer le module rewrite d'Apache (couramment utilisé pour les URLs propres)
+# Activer le module rewrite d'Apache
 RUN a2enmod rewrite
 
-# Configuration d'Apache pour servir votre application depuis /var/www/html
-<VirtualHost *:80>
-    DocumentRoot /var/www/html
-    <Directory /var/www/html/>
-        Options Indexes FollowSymLinks MultiViews
-        AllowOverride All
-        Require all granted
-    </Directory>
-</VirtualHost>
+# Copier la configuration du VirtualHost
+COPY vhost.conf /etc/apache2/sites-available/your_app.conf
 
-# Supprimer la configuration par défaut d'Apache
+# Désactiver le site par défaut
 RUN a2dissite 000-default.conf
 
-# Activer votre configuration
-RUN a2ensite default
+# Activer votre configuration de VirtualHost
+RUN a2ensite your_app.conf
 
 # Copier les fichiers de l'application
 COPY . /var/www/html/
