@@ -13,8 +13,24 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 RUN docker-php-ext-install -j$(nproc) gd mysqli pdo pdo_pgsql zip
 
-# Activer d'autres extensions PHP courantes (décommentez si nécessaire)
-# RUN docker-php-ext-install -j$(nproc) intl opcache
+# Activer le module rewrite d'Apache (couramment utilisé pour les URLs propres)
+RUN a2enmod rewrite
+
+# Configuration d'Apache pour servir votre application depuis /var/www/html
+<VirtualHost *:80>
+    DocumentRoot /var/www/html
+    <Directory /var/www/html/>
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+
+# Supprimer la configuration par défaut d'Apache
+RUN a2dissite 000-default.conf
+
+# Activer votre configuration
+RUN a2ensite default
 
 # Copier les fichiers de l'application
 COPY . /var/www/html/
@@ -22,19 +38,8 @@ COPY . /var/www/html/
 # Définir le répertoire de travail
 WORKDIR /var/www/html
 
-# Configuration d'Apache (si nécessaire, adaptez selon vos besoins)
-<FilesMatch \.php$>
-    SetHandler application/x-httpd-php
-</FilesMatch>
-<Directory /var/www/html>
-    Options Indexes FollowSymLinks MultiViews
-    AllowOverride All
-    Require all granted
-</Directory>
-# ... d'autres configurations d'Apache ...
-
 # Exposer le port 80
 EXPOSE 80
 
-# Commande pour démarrer le serveur Apache (devrait être la commande par défaut de l'image php:-apache)
-# CMD ["apache2-foreground"]
+# Commande pour démarrer le serveur Apache
+CMD ["apache2-foreground"]
