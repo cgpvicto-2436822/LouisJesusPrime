@@ -1,38 +1,32 @@
-FROM php:8.0-fpm-alpine
+FROM alpine:3.19
 
-# Nettoyer le cache APK
-RUN rm -rf /var/cache/apk/*
-
-# Installer les dépendances système nécessaires pour PHP et Apache + MariaDB
+# Installer PHP 8.0 et les dépendances nécessaires
 RUN apk add --no-cache --update \
+    php80 \
+    php80-fpm \
+    php80-mysqli \
+    php80-pdo \
+    php80-pdo_pgsql \
+    php80-gd \
+    php80-xml \
+    php80-mbstring \
+    php80-bcmath \
     apache2 \
     apache2-utils \
+    mariadb-client \
+    mariadb-server \
+    mysql-client \
+    zip \
+    unzip \
     libpng-dev \
     libjpeg-turbo-dev \
     libwebp-dev \
     freetype-dev \
-    libxpm-dev \
-    postgresql-client \
-    mariadb-client \
-    mysql mysql-client \
-    mariadb-server \
-    zip \
-    unzip
+    libxpm-dev
 
-# Installer les extensions PHP de base
-RUN docker-php-ext-configure gd \
-    --with-freetype \
-    --with-jpeg \
-    --with-webp \
-    --with-xpm
-RUN docker-php-ext-install -j$(nproc) gd pdo pdo_pgsql mysqli zip
-
-# Installer d'autres extensions courantes (à adapter selon vos besoins)
-RUN docker-php-ext-install -j$(nproc) \
-    bcmath \
-    mbstring \
-    xml \
-    intl
+# Configurer les extensions PHP
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp --with-xpm
+RUN docker-php-ext-install -j$(nproc) gd mysqli pdo pdo_pgsql
 
 # Installer Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
