@@ -1,46 +1,40 @@
-FROM php:8.0-fpm-alpine
+FROM php:8.1-apache # Ou une autre version de PHP si nécessaire
 
-# Installer les dépendances système nécessaires pour PHP et Apache
-RUN apk add --no-cache --update \
-    apache2 \
-    apache2-utils \
+# Installer les dépendances système courantes
+RUN apt-get update && apt-get install -y \
+    libpq-dev \
+    libzip-dev \
     libpng-dev \
-    libjpeg-turbo-dev \
-    libwebp-dev \
-    freetype-dev \
-    libxpm-dev
+    libjpeg-dev \
+    libfreetype6-dev \
+    --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
-# Installer les extensions PHP de base
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp --with-xpm
+# Installer et activer les extensions PHP
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 RUN docker-php-ext-install -j$(nproc) gd mysqli pdo pdo_pgsql zip
 
-# Installer d'autres extensions courantes (à adapter selon vos besoins)
-RUN docker-php-ext-install -j$(nproc) \
-    bcmath \
-    mbstring \
-    xml \
-    intl
+# Activer d'autres extensions PHP courantes (décommentez si nécessaire)
+# RUN docker-php-ext-install -j$(nproc) intl opcache
 
-# Installer Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# Copier les fichiers de l'application
+COPY . /var/www/html/
 
-# Activer le module rewrite d'Apache
-RUN a2enmod rewrite
-
-# Copier la configuration Apache personnalisée
-COPY apache2.conf /etc/apache2/apache2.conf
-COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
-
-# Copier le code de l'application dans le conteneur
-COPY . /var/www/html
-
-# Définir le dossier de travail
+# Définir le répertoire de travail
 WORKDIR /var/www/html
 
-# Exposer le port 80 pour Apache
+# Configuration d'Apache (si nécessaire, adaptez selon vos besoins)
+<FilesMatch \.php$>
+    SetHandler application/x-httpd-php
+</FilesMatch>
+<Directory /var/www/html>
+    Options Indexes FollowSymLinks MultiViews
+    AllowOverride All
+    Require all granted
+</Directory>
+# ... d'autres configurations d'Apache ...
+
+# Exposer le port 80
 EXPOSE 80
 
-# Définir la commande pour démarrer Apache en arrière-plan et PHP-FPM au premier plan
-CMD ["/bin/sh", "-c", "php-fpm & apachectl -D FOREGROUND"]
-
-#17ujNaViilm1FDOK c'est le mdp de la base de données
+# Commande pour démarrer le serveur Apache (devrait être la commande par défaut de l'image php:-apache)
+# CMD ["apache2-foreground"]
