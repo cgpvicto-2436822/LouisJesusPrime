@@ -1,7 +1,7 @@
 FROM alpine:3.19
 
 # Ajouter le dépôt "testing" (ATTENTION: Ceci n'est pas recommandé pour la production)
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.19/testing" >> /etc/apk/repositories
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.19/testing/x86_64" >> /etc/apk/repositories
 RUN apk update
 
 # Installer PHP 8.0 et les dépendances nécessaires
