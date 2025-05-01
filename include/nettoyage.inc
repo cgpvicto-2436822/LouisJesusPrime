@@ -1,5 +1,6 @@
 <?php
-if (isset($mysqli)) { 
-    $mysqli->close();
+// Nettoyage pour PDO
+if (isset($pdo)) {
+    $pdo = null; // Fermer la connexion PDO en détruisant l'objet
 }
 ?>

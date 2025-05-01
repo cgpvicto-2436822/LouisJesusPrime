@@ -11,38 +11,42 @@ if (!empty($_POST)) {
         $equipe = htmlspecialchars($_POST['equipe'], ENT_QUOTES);
         $date = htmlspecialchars($_POST['date'], ENT_QUOTES);
 
-
-        if ($mysqli->connect_error) {
-            die("Connexion échouée : " . $mysqli->connect_error);
+        if (!$pdo) {
+            die("Erreur de connexion à la base de données.");
         }
 
-        $requete3 = "INSERT INTO resultats (equipe_id, rang, score_final, date_partie) VALUES (?,?,?,?)";
-        $resultat3 = $mysqli->prepare($requete3);
-        $resultat3->bind_param("ssss",  $equipe ,$rang, $score,  $date);
+        $requete3 = "INSERT INTO resultats (equipe_id, rang, score_final, date_partie) VALUES (:equipe, :rang, :score, :date)";
+        $stmt = $pdo->prepare($requete3);
+        $stmt->bindParam(':equipe', $equipe);
+        $stmt->bindParam(':rang', $rang, PDO::PARAM_INT);
+        $stmt->bindParam(':score', $score, PDO::PARAM_INT);
+        $stmt->bindParam(':date', $date);
 
-        if ($resultat3->execute()) {
+        if ($stmt->execute()) {
             $_SESSION['operation_reussie'] = true;
-            $_SESSION['message_operation'] = "La demende a été affectué avec succès !";
+            $_SESSION['message_operation'] = "La demande a été effectuée avec succès !";
         } else {
             $_SESSION['operation_reussie'] = false;
-            $_SESSION['message_operation'] = "oups...!";
+            $_SESSION['message_operation'] = "Oups...!";
+            // Vous pouvez afficher l'erreur SQL pour le débogage si nécessaire
+            // error_log("Erreur SQL: " . $stmt->errorInfo()[2]);
         }
-        $resultat3->close();
-    }}
-
-else {
+        $stmt->closeCursor();
+    }
+} else {
     // réagir si l'appel ne provient pas du formulaire
     // par exemple, ici, on redirige vers la page d'accueil sans avertissement
     include ('entete.inc');
-    echo "Veuillez accéder a cette page a partir du formulaire.";
+    echo "Veuillez accéder à cette page à partir du formulaire.";
     include ('pied_page.inc');
 }
 
 header('Location: index.php');
+
 // *** protection XSS ******************************************************************
 foreach ($_POST as $cle => $valeur) {
     $_POST[$cle] = htmlspecialchars($valeur, ENT_QUOTES);
 }
 
-require('include/nettoyage.inc')
+require('include/nettoyage.inc');
 ?>

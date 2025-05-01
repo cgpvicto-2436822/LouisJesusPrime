@@ -1,50 +1,47 @@
 <?php
 require('include/Configuration.inc');
 
-
 if (!empty($_POST)) {
     // traiter le formulaire
     // effectuer ensuite une redirection vers une autre page
+
+    $nom = htmlspecialchars($_POST['nom'], ENT_QUOTES);
+    $message = htmlspecialchars($_POST['message'], ENT_QUOTES);
+    $email = htmlspecialchars($_POST['email'], ENT_QUOTES);
+    $sujet = htmlspecialchars($_POST['sujet'], ENT_QUOTES);
+
+    if (!$pdo) {
+        die("Erreur de connexion à la base de données.");
+    }
+
+    $requete2 = "INSERT INTO contacts (nom, message, email, sujet) VALUES (:nom, :message, :email, :sujet)";
+    $stmt = $pdo->prepare($requete2);
+    $stmt->bindParam(':nom', $nom);
+    $stmt->bindParam(':message', $message);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':sujet', $sujet);
+
+    if ($stmt->execute()) {
+        session_start();
+        $_SESSION['operation_reussie'] = true;
+        $_SESSION['message_operation'] = "Votre message a été envoyé avec succès !";
+    } else {
+        session_start();
+        $_SESSION['operation_reussie'] = false;
+        $_SESSION['message_operation'] = "Oups, une erreur s'est produite lors de l'envoi du message.";
+        // Vous pouvez afficher l'erreur SQL pour le débogage si nécessaire
+        // error_log("Erreur SQL: " . $stmt->errorInfo()[2]);
+    }
+    $stmt->closeCursor();
     header('Location: index.php');
-}
-else {
+    exit(); // Assurez-vous d'arrêter l'exécution du script après la redirection
+} else {
     // réagir si l'appel ne provient pas du formulaire
     // par exemple, ici, on redirige vers la page d'accueil sans avertissement
     include ('entete.inc');
-    echo "Veuillez accéder a cette page a partir du formulaire.";
+    echo "Veuillez accéder à cette page à partir du formulaire de contact.";
     include ('pied_page.inc');
 }
 
-$nom = $_POST['nom'];
-$message = $_POST['message'];
-$email = $_POST['email'];
-$sujet = $_POST['sujet'];
-
-/*echo "$nom, $message, $email, $sujet";*/
-
-if ($mysqli->connect_error) {
-    die("Connexion échouée : " . $mysqli->connect_error);
-}
-
-$requete2 = "INSERT INTO contacts (nom, message, email, sujet) VALUES (?,?,?,?)";
-$resultat2 = $mysqli->prepare($requete2);
-$resultat2->bind_param("ssss", $nom, $message, $email, $sujet);
-if ($resultat2->execute()) {
-    $_SESSION['operation_reussie'] = true;
-    $_SESSION['message_operation'] = "La demende a été affectué avec succès !";
-} else {
-    $_SESSION['operation_reussie'] = false;
-    $_SESSION['message_operation'] = "oups...!";
-}
-$resultat2->close();
-
-// *** protection XSS ******************************************************************
-foreach ($_POST as $cle => $valeur) {
-    $_POST[$cle] = htmlspecialchars($valeur, ENT_QUOTES);
-}
-
-
-
-
-require('include/nettoyage.inc')
+require('include/nettoyage.inc');
 ?>
