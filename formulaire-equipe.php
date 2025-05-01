@@ -2,14 +2,16 @@
 require ('include/Configuration.inc');
 require ('entete.inc');
 
-
 // le squelette provient d'apical:
 $requete1 = "SELECT nom  FROM jeux";
-$resultat1 = $mysqli->query($requete1);
-
-/*if ($resultat1 == false) {
-    echo "IL N'Y A AUCUN RÉSULTAS";
-}*/
+try {
+    $resultat1 = $pdo->query($requete1);
+} catch (PDOException $e) {
+    echo "<p class='message-erreur'>Erreur lors de la récupération des jeux.</p>";
+    error_log("Erreur PDO: " . $e->getMessage());
+    // Vous pourriez envisager un message plus convivial pour l'utilisateur final
+    $resultat1 = false; // Pour que la boucle while ne s'exécute pas
+}
 
 ?>
     <form onsubmit="validerFormulaireEquipe(event)" id="mon-formulaire" method="post" action="traiter-equipe.php">
@@ -27,21 +29,26 @@ $resultat1 = $mysqli->query($requete1);
 
         <label for="jeu">Choisissez une option :</label>
         <select id="jeu" name="jeu">
-        <?php
-            while ($enreg1 = $resultat1->fetch_row())
-            {
-                echo "<option name='jeu' value=$enreg1[0]>$enreg1[0]</option>";
+            <?php
+            if ($resultat1) {
+                while ($enreg1 = $resultat1->fetch(PDO::FETCH_ASSOC))
+                {
+                    echo "<option name='jeu' value='" . htmlspecialchars($enreg1['nom']) . "'>" . htmlspecialchars($enreg1['nom']) . "</option>";
+                }
+                $resultat1->closeCursor(); // Fermer le curseur après utilisation
+            } else {
+                echo "<option value=''>Aucun jeu disponible</option>";
             }
             ?>
         </select>
 
         <label for="date">* Date</label>
-        <input type="date" id="date" name="date" maxlength="100" value="Aujourd'hui">
+        <input type="date" id="date" name="date" maxlength="100" value="<?php echo date('Y-m-d'); ?>">
         <div id="dateerreur" class="" style="display: none;">la date n'est pas valide</div>
 
         <button type="submit">Envoyer</button>
     </form>
 <?php
 require ('pied_page.inc');
-require ('include/nettoyage.inc')
+require ('include/nettoyage.inc');
 ?>
