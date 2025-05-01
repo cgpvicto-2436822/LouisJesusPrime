@@ -1,5 +1,9 @@
 FROM alpine:3.19
 
+# Ajouter le dépôt "testing" (ATTENTION: Ceci n'est pas recommandé pour la production)
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.19/testing" >> /etc/apk/repositories
+RUN apk update
+
 # Installer PHP 8.0 et les dépendances nécessaires
 RUN apk add --no-cache --update \
     php \
@@ -22,8 +26,8 @@ RUN apk add --no-cache --update \
     freetype-dev \
     libxpm-dev
 
-# Installer MariaDB Server séparément
-RUN apk add --no-cache mariadb mariadb-server
+# Tenter d'installer MariaDB Server depuis le dépôt "community" ou "testing"
+RUN apk add --no-cache mariadb mariadb-server mariadb-server-base --allow-untrusted
 
 # Configurer les extensions PHP
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp --with-xpm
