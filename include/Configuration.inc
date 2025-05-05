@@ -8,21 +8,21 @@ require_once 'include/ma-bibliotheque.php';
 
 $nomPage = basename($_SERVER['SCRIPT_NAME']);
 
-$host = parse_url(getenv('SUPABASE_URL'), PHP_URL_HOST);
-$port = parse_url(getenv('SUPABASE_URL'), PHP_URL_PORT) ?: 5432; // Port par défaut de PostgreSQL
-$dbname = trim(parse_url(getenv('SUPABASE_URL'), PHP_URL_PATH), '/');
-$user = parse_url(getenv('SUPABASE_URL'), PHP_URL_USER);
-$password = parse_url(getenv('SUPABASE_URL'), PHP_URL_PASS);
+// ... votre code précédent ...
 
-$pdo = null; // Initialiser l'objet PDO à null
+$supabase_pooler_url = getenv('SUPABASE_POOLER_URL');
 
-try {
-    $pdo = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $user, $password);
-    // Définir le mode d'erreur PDO sur Exception pour une meilleure gestion des erreurs
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // echo "Connexion à PostgreSQL réussie!"; // Pour le débogage
-} catch (PDOException $e) {
-    die("Échec lors de la connexion à la base de données : " . $e->getMessage());
+if ($supabase_pooler_url) {
+    try {
+        $pdo = new PDO($supabase_pooler_url);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // echo "Connexion à PostgreSQL via le pooler (variable d'environnement) réussie!";
+    } catch (PDOException $e) {
+        die("Échec lors de la connexion à la base de données via le pooler (variable d'environnement) : " . $e->getMessage());
+    }
+} else {
+    // Gérer le cas où la variable d'environnement n'est pas définie
+    die("La variable d'environnement SUPABASE_POOLER_URL n'est pas définie.");
 }
 
 $titre = "";
