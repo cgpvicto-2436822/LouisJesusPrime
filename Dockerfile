@@ -13,6 +13,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 RUN docker-php-ext-install -j$(nproc) gd mysqli pdo pdo_pgsql zip
 
+# Activer explicitement l'extension pdo_pgsql
+RUN docker-php-ext-enable pdo_pgsql
+
 # Activer le module rewrite d'Apache
 RUN a2enmod rewrite
 
