@@ -1,20 +1,13 @@
-FROM php:8.2-fpm-debian  # Remplacez par la version PHP que vous utilisez
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    libpq-dev \
-    php${PHP_VERSION%-*}-pgsql \
-    && docker-php-ext-enable pdo pdo_pgsql
-
 FROM php:8.1-apache
 
-# Installer les dépendances système courantes
-RUN apt-get update && apt-get install -y \
+# Installer les dépendances système et les bibliothèques nécessaires pour les extensions
+RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq-dev \
     libzip-dev \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
-    --no-install-recommends && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*
 
 # Installer et activer les extensions PHP
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
