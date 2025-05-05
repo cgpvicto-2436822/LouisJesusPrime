@@ -1,3 +1,10 @@
+FROM php:8.2-fpm-debian  # Remplacez par la version PHP que vous utilisez
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libpq-dev \
+    php${PHP_VERSION%-*}-pgsql \
+    && docker-php-ext-enable pdo pdo_pgsql
+
 FROM php:8.1-apache
 
 # Installer les dépendances système courantes
