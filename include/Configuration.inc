@@ -59,6 +59,5 @@ if ($pdo) {
     }
 
     $stmt->closeCursor();
-    $pdo = null; // Fermer la connexion PDO
 }
 ?>
