@@ -53,6 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                     $_SESSION['message_operation'] = "Vous avez été connecté avec succès " . $enreg['prenom'] . " " . $enreg['nomfamille'] . "!";
                     $_SESSION['est_authentifie'] = true;
                 }
+                
+                echo password_hash($enreg['motdepasse']);
             }
         }
     }
@@ -63,6 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         error_log("Erreur PDO: " . $e->getMessage());
     }
 }}
-
+/*
 header('Location: index.php');
 exit;
