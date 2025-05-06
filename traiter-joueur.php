@@ -25,11 +25,9 @@ if (!empty($_POST)) {
         $stmt->bindParam(':courriel', $email);
 
         if ($stmt->execute()) {
-            session_start();
             $_SESSION['operation_reussie'] = true;
             $_SESSION['message_operation'] = "Le joueur a été ajouté avec succès !";
         } else {
-            session_start();
             $_SESSION['operation_reussie'] = false;
             $_SESSION['message_operation'] = "Oups, une erreur s'est produite lors de l'ajout du joueur.";
             // Vous pouvez afficher l'erreur SQL pour le débogage si nécessaire
@@ -37,6 +35,10 @@ if (!empty($_POST)) {
         }
         $stmt->closeCursor();
     }
+
+    header('Location: index.php');
+    exit; // Assurez-vous d'arrêter l'exécution du script après la redirection
+
 } else {
     // réagir si l'appel ne provient pas du formulaire
     // par exemple, ici, on redirige vers la page d'accueil sans avertissement
@@ -44,9 +46,6 @@ if (!empty($_POST)) {
     echo "Veuillez accéder à cette page à partir du formulaire d'ajout de joueur.";
     include ('pied_page.inc');
 }
-
-header('Location: index.php');
-exit(); // Assurez-vous d'arrêter l'exécution du script après la redirection
 
 require('include/nettoyage.inc');
 ?>
