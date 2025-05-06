@@ -1,4 +1,6 @@
 <?php
+require('include/Configuration.inc');
+
 if (!empty($_POST)) {
 // traiter le formulaire
 // effectuer ensuite une redirection vers une autre page
