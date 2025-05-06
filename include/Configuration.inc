@@ -7,6 +7,8 @@ require_once 'include/ma-bibliotheque.php';
 
 $nomPage = basename($_SERVER['SCRIPT_NAME']);
 
+$_SESSION['est_authentifie'] = false;
+
 $titre = "";
 $description = "";
 $h1 = "";

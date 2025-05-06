@@ -4,7 +4,7 @@
     $AuthDeco = "";
     $lien = "";
 
-if ($_SESSION['est_authentifie'] == true) {
+if ($_SESSION['est_authentifie'] == false) {
     $AuthDeco = "Authentification";
     $lien = "formulaire-authentification.php";
 }
