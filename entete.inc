@@ -1,8 +1,5 @@
 <?php
     inclureJsPropreALaPageActuelle();
-?>
-
-<?php
 
 echo "<!DOCTYPE html>";
 echo "<html lang='fr-CA'>";
