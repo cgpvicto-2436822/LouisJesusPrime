@@ -1,6 +1,6 @@
 <?php
-require ('entete.inc');
 require ('include/Configuration.inc');
+require ('entete.inc');
 ?>
 
 <?php
