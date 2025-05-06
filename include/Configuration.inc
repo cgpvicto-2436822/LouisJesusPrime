@@ -1,9 +1,13 @@
 <?php
-// Initialiser la session
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+    $_SESSION['est_authentifier'] = false;
+}
 
 // Inclure le fichier de bibliothèque si nécessaire
 require_once 'include/ma-bibliotheque.php';
+
+if($_SESSION)
 
 $nomPage = basename($_SERVER['SCRIPT_NAME']);
 
