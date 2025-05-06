@@ -1,6 +1,19 @@
 <?php
     inclureJsPropreALaPageActuelle();
 
+    $AuthDeco = "";
+    $lien = "";
+
+if ($_SESSION['est_authentifie'] == true) {
+    $AuthDeco = "Authentification";
+    $lien = "formulaire-authentification.php";
+}
+else
+{
+    $AuthDeco = "Deconnexion";
+    $lien = "deconnecter.php";
+}
+
 echo "<!DOCTYPE html>";
 echo "<html lang='fr-CA'>";
 echo "<head>";
@@ -24,6 +37,7 @@ echo '<a href="a-venir.php" class="' . (basename($_SERVER['PHP_SELF']) == 'a-ven
 echo '<a href="resultats.php" class="' . (basename($_SERVER['PHP_SELF']) == 'resultats.php' ? 'active' : '') . '">Résultats</a>';
 echo '<a href="formulaire-contact.php" class="' . (basename($_SERVER['PHP_SELF']) == 'formulaire-contact.php' ? 'active' : '') . '">Nous Contacter</a>';
 echo '<a href="joueurs.php" class="' . (basename($_SERVER['PHP_SELF']) == 'joueurs.php' ? 'active' : '') . '">Joueurs</a>';
+echo '<a href=' . $lien . ' class="' . (basename($_SERVER['PHP_SELF']) == 'formulaire-authentification.php' ? 'active' : '') . '">' . $AuthDeco . '</a>';
 echo "    </div>";
 echo "</nav>";
 echo "<div class='separation'></div>";
