@@ -3,33 +3,45 @@
 session_start();
 
 // Inclure le fichier de bibliothèque si nécessaire
-// Assurez-vous que le chemin est correct
 require_once 'include/ma-bibliotheque.php';
 
 $nomPage = basename($_SERVER['SCRIPT_NAME']);
-
-// ... votre code précédent ...
-
-$supabase_pooler_url = getenv('SUPABASE_POOLER_URL');
-
-if ($supabase_pooler_url) {
-    try {
-        $pdo = new PDO($supabase_pooler_url);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        // echo "Connexion à PostgreSQL via le pooler (variable d'environnement) réussie!";
-    } catch (PDOException $e) {
-        die("Échec lors de la connexion à la base de données via le pooler (variable d'environnement) : " . $e->getMessage());
-    }
-} else {
-    // Gérer le cas où la variable d'environnement n'est pas définie
-    die("La variable d'environnement SUPABASE_POOLER_URL n'est pas définie.");
-}
 
 $titre = "";
 $description = "";
 $h1 = "";
 $texte = "";
 $accroche = "";
+
+$supabase_pooler_url = getenv('SUPABASE_POOLER_URL');
+
+if ($supabase_pooler_url) {
+    // Convertir l'URL PostgreSQL (type URI) en DSN compatible PDO
+    $parsed = parse_url($supabase_pooler_url);
+
+    if (!$parsed || !isset($parsed['host'], $parsed['user'], $parsed['pass'], $parsed['path'])) {
+        die("L'URL de connexion est invalide ou mal formée.");
+    }
+
+    $host = $parsed['host'];
+    $port = $parsed['port'] ?? 5432; // Valeur par défaut
+    $user = $parsed['user'];
+    $pass = $parsed['pass'];
+    $dbname = ltrim($parsed['path'], '/'); // Supprimer le / initial
+
+    $dsn = "pgsql:host=$host;port=$port;dbname=$dbname";
+
+    try {
+        $pdo = new PDO($dsn, $user, $pass, [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+        ]);
+        // echo "Connexion réussie.";
+    } catch (PDOException $e) {
+        die("Erreur de connexion à la base Supabase : " . $e->getMessage());
+    }
+} else {
+    die("La variable d'environnement SUPABASE_POOLER_URL n'est pas définie.");
+}
 
 if ($pdo) {
     $requete = "SELECT titre, description, h1, texte, url, accroche FROM pages WHERE url = :nomPage";
@@ -46,8 +58,7 @@ if ($pdo) {
         $accroche = $enreg['accroche'];
     }
 
-    $stmt->closeCursor(); // Fermer le curseur
+    $stmt->closeCursor();
     $pdo = null; // Fermer la connexion PDO
 }
-
 ?>
