@@ -1,7 +1,7 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
-    $_SESSION['est_authentifier'] = false;
+    $_SESSION['est_authentifie'] = false;
 }
 
 // Inclure le fichier de bibliothèque si nécessaire
