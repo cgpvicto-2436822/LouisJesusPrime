@@ -7,8 +7,6 @@ if (session_status() === null) {
 // Inclure le fichier de bibliothèque si nécessaire
 require_once 'include/ma-bibliotheque.php';
 
-if($_SESSION)
-
 $nomPage = basename($_SERVER['SCRIPT_NAME']);
 
 $titre = "";
