@@ -1,5 +1,5 @@
 <?php
-if (session_status() === null) {
+if (session_status() === PHP_SESSION_NONE) {
     session_start();
     $_SESSION['est_authentifier'] = false;
 }
