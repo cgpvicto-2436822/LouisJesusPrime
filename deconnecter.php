@@ -27,5 +27,6 @@ if (ini_get('session.use_cookies')) {
 session_destroy();
 
 // 5) Rediriger vers la page de login (ou accueil)
+$_SESSION['message_operation'] = "Vous avez été décoconnecté avec succès!";
 header('Location: index.php');
 exit;
