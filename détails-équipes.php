@@ -31,9 +31,9 @@ if (isset($_GET['id']))
                 echo "<td>" . htmlspecialchars($enreg['nomfamille']) . "</td>";
                 echo "<td>" . htmlspecialchars($enreg['pseudo']) . "</td>";
                 echo "</tr>";
-                echo "</table>";
 
             }
+            echo "</table>";
         }
 
         else

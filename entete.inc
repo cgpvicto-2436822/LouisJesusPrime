@@ -3,15 +3,18 @@
 
     $AuthDeco = "";
     $lien = "";
+    $logo = "";
 
 if ($_SESSION['est_authentifie'] == false) {
     $AuthDeco = "Connexion";
     $lien = "formulaire-authentification.php";
+    $logo = "✅";
 }
 else
 {
     $AuthDeco = "Deconnexion";
     $lien = "deconnecter.php";
+    $logo = "❌";
 }
 
 echo "<!DOCTYPE html>";
@@ -30,14 +33,14 @@ echo "    <script src='https://kit.fontawesome.com/1ec114f421.js' crossorigin='a
 echo "</head>";
 echo "<body>";
 echo "<nav>";
-echo "<div class='container'>";
+echo "<div class='container' id='menu'>";
 echo '<a href="index.php" class="' . (basename($_SERVER['PHP_SELF']) == 'index.php' ? 'active' : '') . '">Accueil</a>';
 echo '<a href="a-propos.php" class="' . (basename($_SERVER['PHP_SELF']) == 'a-propos.php' ? 'active' : '') . '">À propos</a>';
 echo '<a href="a-venir.php" class="' . (basename($_SERVER['PHP_SELF']) == 'a-venir.php' ? 'active' : '') . '">Menu 2</a>';
 echo '<a href="resultats.php" class="' . (basename($_SERVER['PHP_SELF']) == 'resultats.php' ? 'active' : '') . '">Résultats</a>';
 echo '<a href="formulaire-contact.php" class="' . (basename($_SERVER['PHP_SELF']) == 'formulaire-contact.php' ? 'active' : '') . '">Nous Contacter</a>';
 echo '<a href="joueurs.php" class="' . (basename($_SERVER['PHP_SELF']) == 'joueurs.php' ? 'active' : '') . '">Joueurs</a>';
-echo '<div class="menuConnexion"><a href=' . $lien . ' class="' . (basename($_SERVER['PHP_SELF']) == 'formulaire-authentification.php' ? 'active' : '') . '">' . $AuthDeco . '</a></div>';
+echo '<div class="menuConnexion"><a href=' . $lien . ' class="' . (basename($_SERVER['PHP_SELF']) == 'formulaire-authentification.php' ? 'active' : '') . '">' . $logo .  $AuthDeco . '</a></div>';
 echo "    </div>";
 echo "</nav>";
 echo "<div class='separation'></div>";

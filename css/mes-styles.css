@@ -24,6 +24,12 @@ label
 
 /**v********LES STYLES CSS CI-DESSOUS PROVIENNENT D'INTERNET*****************v***/
 
+#menu
+{
+    display: flex;
+    flex-direction: row;
+}
+
 nav
 {
     display: flex;
