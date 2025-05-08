@@ -26,6 +26,7 @@ nav .navigation-items {
     display: flex; /* Pour aligner les éléments enfants */
     justify-content: space-between; /* Pour mettre de l'espace entre les éléments */
     align-items: center; /* Pour aligner verticalement au centre */
+    flex-direction: row;
 }
 
 nav .nav-left a {

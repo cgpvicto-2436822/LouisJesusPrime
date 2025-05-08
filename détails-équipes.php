@@ -12,7 +12,7 @@ if (isset($_GET['id']))
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         $row_count = $stmt->rowCount();
-        
+
         echo "<table>";
         echo "<tr>";
         echo "<th>Prenom</th>";
