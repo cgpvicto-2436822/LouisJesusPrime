@@ -16,6 +16,12 @@ label
 
 /**v********LES STYLES CSS CI-DESSOUS PROVIENNENT D'INTERNET*****************v***/
 
+nav
+{
+    display: flex;
+    flex-direction: row;
+}
+
 nav .navigation-items {
     display: flex; /* Pour aligner les éléments enfants */
     justify-content: space-between; /* Pour mettre de l'espace entre les éléments */

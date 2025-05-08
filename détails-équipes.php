@@ -4,7 +4,8 @@ require ('entete.inc');
 ?>
 
 <?php
-if (isset($_GET['id'])) {
+if (isset($_GET['id']))
+{
     $id = $_GET['id'];
 
     try {
@@ -23,8 +24,10 @@ if (isset($_GET['id'])) {
         echo "</tr>";
 
 
-        if ($row_count > 0) {
-            while ($enreg = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        if ($row_count > 0)
+        {
+            while ($enreg = $stmt->fetch(PDO::FETCH_ASSOC))
+            {
 
                 echo "<tr>";
                 echo "<td>" . htmlspecialchars($enreg['prenom']) . "</td>";
@@ -33,21 +36,29 @@ if (isset($_GET['id'])) {
                 echo "</tr>";
 
             }
-        } else {
+        }
+
+        else
+        {
             echo "<tr><td colspan='5'><p class='message-avertissement'>Aucun résultat trouvé.</p></td></tr>";
         }
 
         $stmt->closeCursor();
 
-    } catch (PDOException $e) {
+    }
+
+    catch (PDOException $e)
+    {
         echo "<p class='message-erreur'>Nous sommes désolés, les clients ne peuvent pas être affichés.</p>";
         error_log("Erreur PDO: " . $e->getMessage());
     }
 }
+
 else {
     // Gérer le cas où id n'est pas défini
 }
 ?>
+</div>
 </div>
 <?php
 require ('pied_page.inc');
