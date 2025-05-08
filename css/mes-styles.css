@@ -26,7 +26,6 @@ nav .navigation-items {
     display: flex; /* Pour aligner les éléments enfants */
     justify-content: space-between; /* Pour mettre de l'espace entre les éléments */
     align-items: center; /* Pour aligner verticalement au centre */
-    width: 100%; /* Pour que la div prenne toute la largeur du container */
 }
 
 nav .nav-left a {
