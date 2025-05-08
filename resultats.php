@@ -40,8 +40,8 @@ if ($resultat1) {
 }
 
 echo "</table>";
-
-echo "<a href='formulaire-resultat.php'><button type='button'>Ajouter un résultat</button></a>";
+if ($_SESSION['est_authentifie']) {
+echo "<a href='formulaire-resultat.php'><button type='button'>Ajouter un résultat</button></a>";}
 
 require ("pied_page.inc");
 require ("include/nettoyage.inc");

@@ -61,7 +61,9 @@ try {
 
 echo "    </div>";
 
-echo "<a href='formulaire-equipe.php'><button type='button'>Ajouter une équipe</button></a>";
+if ($_SESSION['est_authentifie']) {
+    echo "<a href='formulaire-equipe.php'><button type='button'>Ajouter une équipe</button></a>";
+}
 echo "</div>";
 echo "</div>";
 

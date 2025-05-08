@@ -36,9 +36,10 @@ if ($resultat1) {
 
 echo "</table>";
 
+if ($_SESSION['est_authentifie']) {
 echo "<div class='boutonBleu'>";
 echo "<a href='formulaire-joueur.php'><button type='button'>Ajouter un joueur!</button></a>";
-echo "</div>";
+echo "</div>";}
 
 require ("pied_page.inc");
 require ("include/nettoyage.inc");
