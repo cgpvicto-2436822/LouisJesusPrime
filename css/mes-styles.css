@@ -14,27 +14,13 @@ label
     color: #cccccc;
 }
 
-.menuConnexion
+#connexion
 {
     margin-left: auto;
-    justify-content: flex-end;
-    align-self: end;
-    width: auto;
 }
 
 /**v********LES STYLES CSS CI-DESSOUS PROVIENNENT D'INTERNET*****************v***/
 
-#menu
-{
-    display: flex;
-    flex-direction: row;
-}
-
-nav
-{
-    display: flex;
-    flex-direction: row;
-}
 
 option
 {
