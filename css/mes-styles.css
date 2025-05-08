@@ -14,6 +14,14 @@ label
     color: #cccccc;
 }
 
+.menuConnexion
+{
+    margin-left: auto;
+    justify-content: flex-end;
+    align-self: end;
+    width: auto;
+}
+
 /**v********LES STYLES CSS CI-DESSOUS PROVIENNENT D'INTERNET*****************v***/
 
 nav
@@ -21,31 +29,6 @@ nav
     display: flex;
     flex-direction: row;
 }
-
-nav .navigation-items {
-    display: flex; /* Pour aligner les éléments enfants */
-    justify-content: space-between; /* Pour mettre de l'espace entre les éléments */
-    align-items: center; /* Pour aligner verticalement au centre */
-    flex-direction: row;
-}
-
-nav .nav-left a {
-    /* Styles pour les liens de gauche (si tu veux les modifier) */
-    margin-right: 15px; /* Ajoute un peu d'espace entre les liens */
-}
-
-nav .nav-right a {
-    /* Styles pour le lien de droite (si tu veux les modifier) */
-    /* Pas besoin de margin-left ici car il est déjà poussé à droite */
-    display: flex; /* Pour aligner l'icône et le texte */
-    align-items: center; /* Pour centrer verticalement l'icône et le texte */
-}
-
-nav .nav-right i {
-    margin-right: 5px; /* Ajoute un peu d'espace entre l'icône et le texte */
-}
-
-
 
 option
 {
