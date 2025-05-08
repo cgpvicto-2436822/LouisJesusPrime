@@ -25,6 +25,7 @@ if ($_SESSION['est_authentifie'] == true) {
 }
 else
 {
+    echo "<br>";
     echo "Vous devez etre authentifié pour pouvoir effectuer cette action";
 }
 

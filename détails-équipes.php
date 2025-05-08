@@ -14,13 +14,27 @@ if (isset($_GET['id'])) {
         $stmt->execute();
         $row_count = $stmt->rowCount();
 
+
+        echo "<table>";
+        echo "<tr>";
+        echo "<th>Prenom</th>";
+        echo "<th>Nom</th>";
+        echo "<th>Pseudo</th>";
+        echo "</tr>";
+
+
         if ($row_count > 0) {
             while ($enreg = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo htmlspecialchars($enreg['prenom']) . " " . htmlspecialchars($enreg['nomfamille']) . ", surnommé: " . htmlspecialchars($enreg['pseudo']);
-                echo "<br>";
+
+                echo "<tr>";
+                echo "<td>" . htmlspecialchars($enreg['prenom']) . "</td>";
+                echo "<td>" . htmlspecialchars($enreg['nomfamille']) . "</td>";
+                echo "<td>" . htmlspecialchars($enreg['pseudo']) . "</td>";
+                echo "</tr>";
+
             }
         } else {
-            echo "<p class='message-avertissement'>Il n'y a aucun client dans le système.</p>";
+            echo "<tr><td colspan='5'><p class='message-avertissement'>Aucun résultat trouvé.</p></td></tr>";
         }
 
         $stmt->closeCursor();
