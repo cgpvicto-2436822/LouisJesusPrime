@@ -59,5 +59,5 @@ echo "<div class='separation'></div>";
 echo "<div id='main'>";
 echo "    <div class='container'>";
 echo "        <h1>$h1</h1>";
-echo $texte;
+echo html_entity_decode($texte);
 ?>
