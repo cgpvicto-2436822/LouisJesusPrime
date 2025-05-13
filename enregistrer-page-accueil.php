@@ -7,7 +7,7 @@ if (!empty($_POST)) {
     {
         $texte = htmlspecialchars($_POST['texte'], ENT_QUOTES);
 
-        $requete = $pdo->prepare("UPDATE pages SET texte = $texte WHERE url = 'index.php'");
+        $requete = $pdo->prepare("UPDATE pages SET texte = :texte WHERE url = 'index.php'");
 
         $requete->bindParam(':texte', $texte);
 
