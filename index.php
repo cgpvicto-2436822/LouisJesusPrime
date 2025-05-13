@@ -64,6 +64,10 @@ echo "    </div>";
 if ($_SESSION['est_authentifie']) {
     echo "<a href='formulaire-equipe.php'><button type='button'>Ajouter une équipe</button></a>";
 }
+echo "<br>";
+if ($_SESSION['est_authentifie']) {
+    echo "<a href='formulaire-page-accueil.php'><button type='button'>Modifiez le texte de l'accueil</button></a>";
+}
 echo "</div>";
 echo "</div>";
 
