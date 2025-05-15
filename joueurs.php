@@ -1,9 +1,11 @@
 <?php
+// Cette page ainsi que le site au complet a été réaliser par Louis Hince, inspiré de la maquette de Christianne Lagacé.
+// Plusieurs fonctions et bouts de code proviennent d'Apical.
 require ("include/Configuration.inc");
 require ("entete.inc");
 
 // le squelette provient d'apical:
-$requete1 = "SELECT DISTINCT prenom, nomfamille, pseudo, dateinscription  FROM joueurs";
+$requete1 = "SELECT DISTINCT prenom, nomfamille, pseudo, dateinscription  FROM joueurs ORDER BY dateinscription ASC";
 try {
     $resultat1 = $pdo->query($requete1);
 } catch (PDOException $e) {

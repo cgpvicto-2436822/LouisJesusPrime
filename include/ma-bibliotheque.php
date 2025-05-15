@@ -1,5 +1,6 @@
 <?php
-
+// Cette page ainsi que le site au complet a été réaliser par Louis Hince, inspiré de la maquette de Christianne Lagacé.
+// Plusieurs fonctions et bouts de code proviennent d'Apical.
 /**
 * Affiche une information de débogage seulement lorsque DEVEL est à true.
 * @author Christiane Lagacé <christiane.lagace@hotmail.com>

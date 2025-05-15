@@ -1,4 +1,7 @@
 <?php
+// Cette page ainsi que le site au complet a été réaliser par Louis Hince, inspiré de la maquette de Christianne Lagacé.
+// Plusieurs fonctions et bouts de code proviennent d'Apical.
+
 // deconnecter.php
 // Toujours commencer par <?php sans aucun espace ni BOM avant
 // 1) Démarrer ou reprendre la session avant toute sortie
