@@ -14,14 +14,16 @@ if (isset($_SESSION['operation_reussie'])) {
     if ($_SESSION['operation_reussie'] == true) {
         echo "<div class='alert ";
         echo "alert-success";
+        echo "' role='alert'>";
         echo "</div>";
     } else {
         echo "<div class='alert ";
         echo "alert-danger";
+        echo "' role='alert'>";
         echo "</div>";
     }
 }
-echo "' role='alert'>";
+
 
 echo isset($_SESSION['message_operation']) ? $_SESSION['message_operation'] : "";
 
