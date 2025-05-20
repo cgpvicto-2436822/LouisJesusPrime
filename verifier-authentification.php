@@ -40,6 +40,7 @@ if (!empty($_POST)) {
                 {
                     $_SESSION['message_operation'] = "Vous avez été connecté avec succès " . $usager['prenom'] . " " . $usager['nomfamille'] . "!";
                     $_SESSION['est_authentifie'] = true;
+                    header('Location: index.php');
                 } else {
                     $_SESSION['message_operation'] = "Oups, une erreur s'est produite lors de l'authentification";
                 }
@@ -54,6 +55,4 @@ if (!empty($_POST)) {
         }
     }
 }
-
-header('Location: index.php');
 exit;

@@ -61,5 +61,18 @@ echo "<div class='separation'></div>";
 echo "<div id='main'>";
 echo "    <div class='container'>";
 echo "        <h1>$h1</h1>";
+
+if (isset($_SESSION['operation_reussie'])) {
+    if ($_SESSION['operation_reussie'] == true) {
+        echo "<div class='alert ";
+        echo "alert-success";
+        echo "</div>";
+    } else {
+        echo "<div class='alert ";
+        echo "alert-danger";
+        echo "</div>";
+    }
+}
+echo "' role='alert'>";
 echo html_entity_decode($texte);
 ?>

@@ -38,8 +38,6 @@ if (!empty($_POST)) {
         $stmt->closeCursor();
     }
 
-    // La redirection doit se faire APRES le traitement du formulaire
-    header('Location: index.php');
     exit; // Assurez-vous d'arrêter l'exécution du script après la redirection
 
 } else {

@@ -10,18 +10,8 @@ if (!empty($_POST)) {
     header('Location: index.php');
 }
 
-echo "<div class='alert ";
-if (isset($_SESSION['operation_reussie'])) {
-    if ($_SESSION['operation_reussie'] == true) {
-        echo "alert-success";
-    } else {
-        echo "alert-danger";
-    }
-}
-echo "' role='alert'>";
-
 echo isset($_SESSION['message_operation']) ? $_SESSION['message_operation'] : "";
-echo "</div>";
+
 
 $_SESSION['message_operation'] = null;
 $_SESSION['operation_reussie'] = null;
